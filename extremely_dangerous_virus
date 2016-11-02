@@ -1,0 +1,35 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define m 9 
+using namespace std;
+
+long long int power_mod( int x, long long int y){
+	if(y==0) return 1;  
+	
+	long long int temp = power_mod(x,y/2);
+	if(y%2==0) 
+	    return (((temp%m)*temp)%m);
+    else
+       return ((((x*temp)%m)*temp)%m);
+}
+int main() {
+    
+	int x, a, b;
+    long long int t, ans, c=1;
+    cin >> a >> b;
+    x = (a+b)/2;
+    cin >> t; 
+    
+	c = power_mod(x,t); 
+	cout << c <<"\n";
+	c = c-1;
+	
+	x = (x%m)/(x-1);
+	c *= x;
+    cout << c;
+    
+    return 0; 
+}
