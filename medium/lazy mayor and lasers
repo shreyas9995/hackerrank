@@ -1,0 +1,37 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+int main() {
+    long int n,sum = 0, k=1, m;
+    cin >> n;
+    long int h[n+1];
+    for(long int i=1; i<=n; i++)
+        cin >> h[i];
+    cin >> m;
+    long int x[m+1];
+    for(long int j=1; j<=m; j++)
+        cin >> x[j];
+    x[0]=0;    
+    sort(x,x+m+1);
+    
+    for(long int j=1; j<=m; j++){
+        while(k<x[j]){
+            if(h[k]<=x[j]-k) 
+                sum+=h[k];
+            else{
+                h[k] = x[j] - k;
+                sum+= h[k];
+            }
+            k++;
+        }
+        if(j==m){
+            for(long int i=x[j]; i<=n; i++){
+                sum+=h[i]; 
+            }
+        }
+    }
+    cout << sum;
+    return 0;
+}
